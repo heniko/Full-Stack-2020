@@ -15,9 +15,11 @@ const reducer = (state = '', action) => {
 }
 
 export const setFilter = (content) => {
-    return {
-        type: 'SET_FILTER',
-        data: { content }
+    return async dispatch => {
+        dispatch({
+            type: 'SET_FILTER',
+            data: { content }
+        })
     }
 }
 

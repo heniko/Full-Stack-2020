@@ -17,13 +17,13 @@ const reducer = (state = '', action) => {
 
 let timer
 
-export const setNotification = (content) => {
+export const setNotification = (content, time) => {
     return async dispatch => {
         if (content !== '') {
             clearTimeout(timer)
             timer = setTimeout(() => {
                 dispatch(setNotification(''))
-            }, 5000)
+            }, time * 1000)
         }
         dispatch({
             type: 'SET_NOTIFICATION',
