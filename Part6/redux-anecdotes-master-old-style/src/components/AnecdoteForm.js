@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 import { addAnecdote } from '../reducers/anecdoteReducer'
 
 const AnecdoteForm = (props) => {
-    console.log(addAnecdote)
-    console.log(props.addAnecdote)
-
     const add = async (event) => {
         event.preventDefault()
         const content = event.target.anecdote.value
