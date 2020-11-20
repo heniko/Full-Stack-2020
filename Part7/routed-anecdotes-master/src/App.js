@@ -97,7 +97,6 @@ const CreateNew = ({ addNew, notification }) => {
 	const history = useHistory()
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(content.value)
 		addNew({
 			content: content.value,
 			author: author.value,
@@ -120,15 +119,15 @@ const CreateNew = ({ addNew, notification }) => {
 			<form onSubmit={handleSubmit}>
 				<div>
 					content
-          			<input {...content} />
+          			<input {...content.field} />
 				</div>
 				<div>
 					author
-          			<input {...author} />
+          			<input {...author.field} />
 				</div>
 				<div>
 					url for more info
-          			<input {...info} />
+          			<input {...info.field} />
 				</div>
 				<button type='submit'>create</button>
 				<button type='button' onClick={handleReset}>reset</button>
