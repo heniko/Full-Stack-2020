@@ -9,6 +9,7 @@ const app = express()
 const bodyParser = require('body-parser')
 require('express-async-errors')
 const mongoose = require('mongoose')
+const blog = require('./models/blog')
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     const { MongoMemoryServer } = require('mongodb-memory-server')
@@ -48,6 +49,33 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
                 passwordHash
             })
             await admin.save()
+
+            const blog1 = new blog({
+                url: 'url.url',
+                title: 'A blog',
+                author: 'Auth',
+                user: user,
+                likes: 2
+            })
+            await blog1.save()
+
+            const blog2 = new blog({
+                url: 'site.url',
+                title: 'Another blog',
+                author: 'Author',
+                user: user,
+                likes: 5
+            })
+            await blog2.save()
+
+            const blog3 = new blog({
+                url: 'url',
+                title: 'Some blog',
+                author: 'Some author',
+                user: admin,
+                likes: 1
+            })
+            await blog3.save()
         })
     })
 
