@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteBlog, likeBlog } from '../reducers/blogReducer'
 
-const Blog = ({ blog, like, deleteBlog, deleteVisible }) => {
+const Blog = ({ blog }) => {
   const [visible, setVisible] = useState(false)
-  const showDelete = { display: deleteVisible ? '' : 'none' }
+  const user = useSelector(state => state.user)
+  const showDelete = { display: user.username === blog.user.username ? '' : 'none' }
   const showWhenVisible = { display: visible ? '' : 'none' }
+  const dispatch = useDispatch()
   const toggleVisible = () => {
     setVisible(!visible)
   }
@@ -14,6 +18,14 @@ const Blog = ({ blog, like, deleteBlog, deleteVisible }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5
+  }
+
+  const like = () => {
+    dispatch(likeBlog(blog))
+  }
+
+  const del = () => {
+    dispatch(deleteBlog(blog, user))
   }
 
   return (
@@ -33,7 +45,7 @@ const Blog = ({ blog, like, deleteBlog, deleteVisible }) => {
           added by {blog.user.name}
         </div>
         <div style={showDelete}>
-          <button onClick={deleteBlog}>delete</button>
+          <button onClick={del}>delete</button>
         </div>
       </div>
     </div>

@@ -1,10 +1,18 @@
 import React from 'react'
+import { useField } from '../hooks/index'
+import { useDispatch } from 'react-redux'
+import { login } from '../reducers/userReducer'
 
-const LoginForm = ({
-  handleSubmit,
-  username,
-  password
-}) => {
+const LoginForm = () => {
+  const username = useField('text')
+  const password = useField('password')
+  const dispatch = useDispatch()
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    dispatch(login(username, password))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
