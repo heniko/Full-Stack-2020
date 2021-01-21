@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button, Form } from 'react-bootstrap'
+
 import { useField } from '../hooks/index'
 import { useDispatch } from 'react-redux'
 import { login } from '../reducers/userReducer'
@@ -14,18 +16,19 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <h2>log in to application</h2>
-        käyttäjätunnus
-        <input {...username.field} />
-      </div>
-      <div>
-        salasana
-        <input {...password.field} />
-      </div>
-      <button type="submit">kirjaudu</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Label>
+          Username
+        </Form.Label>
+        <Form.Control {...username.field}></Form.Control>
+        <Form.Label>
+          Password
+        </Form.Label>
+        <Form.Control {...password.field}></Form.Control>
+      </Form.Group>
+      <Button variant='success' type="submit">Login</Button>
+    </Form>
   )
 }
 

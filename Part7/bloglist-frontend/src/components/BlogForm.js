@@ -1,6 +1,8 @@
 import React from 'react'
-import { useField } from '../hooks/index'
 import { useDispatch, useSelector } from 'react-redux'
+import { Form, Button } from 'react-bootstrap'
+
+import { useField } from '../hooks/index'
 import { createBlog } from '../reducers/blogReducer'
 
 const BlogForm = () => {
@@ -24,21 +26,27 @@ const BlogForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        title:
-        <input {...title.field} />
-      </div>
-      <div>
-        author:
-        <input {...author.field} />
-      </div>
-      <div>
-        url:
-        <input {...url.field} />
-      </div>
-      <button type="submit">create</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Label>
+          Title
+        </Form.Label>
+        <Form.Control {...title.field}></Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>
+          Author
+        </Form.Label>
+        <Form.Control {...author.field}></Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>
+          Url
+        </Form.Label>
+        <Form.Control {...url.field}></Form.Control>
+      </Form.Group>
+      <Button variant='success' type="submit">Create</Button>
+    </Form>
   )
 }
 

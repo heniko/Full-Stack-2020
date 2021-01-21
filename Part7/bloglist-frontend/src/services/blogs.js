@@ -26,4 +26,11 @@ const deleteBlog = async (id, user) => {
   return res.data
 }
 
-export default { getAll, create, like, deleteBlog }
+const blogs = {
+  getAll,
+  create,
+  like,
+  deleteBlog
+}
+
+export default blogs

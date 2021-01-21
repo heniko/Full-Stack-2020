@@ -6,4 +6,8 @@ const login = async (creds) => {
 	return res.data
 }
 
-export default { login }
+const user = {
+	login
+}
+
+export default user
