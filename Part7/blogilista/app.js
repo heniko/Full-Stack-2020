@@ -2,7 +2,7 @@ const config = require('./utils/config')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const middleware = require('./utils/middleware')
-const loginRouter=require('./controllers/login')
+const loginRouter = require('./controllers/login')
 const express = require('express')
 const cors = require('cors')
 const app = express()
@@ -55,7 +55,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
                 title: 'A blog',
                 author: 'Auth',
                 user: user,
-                likes: 2
+                likes: 2,
+                comments: []
             })
             await blog1.save()
 
@@ -64,7 +65,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
                 title: 'Another blog',
                 author: 'Author',
                 user: user,
-                likes: 5
+                likes: 5,
+                comments: []
             })
             await blog2.save()
 
@@ -73,7 +75,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
                 title: 'Some blog',
                 author: 'Some author',
                 user: admin,
-                likes: 1
+                likes: 1,
+                comments: []
             })
             await blog3.save()
         })

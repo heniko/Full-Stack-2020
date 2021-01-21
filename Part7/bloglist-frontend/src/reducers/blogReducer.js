@@ -9,7 +9,7 @@ const blogReducer = (state = [], action) => {
             return state.filter(blog => blog.id !== action.data)
         case 'NEW_BLOG':
             return sortedBlogs([...state, action.data])
-        case 'LIKE_BLOG':
+        case 'REPLACE_BLOG':
             return sortedBlogs(state.map(blog => blog.id === action.data.id ? action.data : blog))
         default:
             return state
@@ -49,7 +49,7 @@ export const likeBlog = (blog) => {
         try {
             const likedBlog = await blogService.like(blog.id)
             dispatch({
-                type: 'LIKE_BLOG',
+                type: 'REPLACE_BLOG',
                 data: likedBlog
             })
         } catch (error) {
@@ -65,7 +65,6 @@ export const likeBlog = (blog) => {
 export const createBlog = (blogObj, user) => {
     return async dispatch => {
         try {
-            console.log(blogObj)
             const newBlog = await blogService.create(blogObj, user)
             dispatch({
                 type: 'NEW_BLOG',
@@ -74,6 +73,25 @@ export const createBlog = (blogObj, user) => {
             dispatch(notify(`Blogi "${blogObj.title}" lisätty`))
         } catch (error) {
             dispatch(notify(`Blogin tallentamisessa tapahtui virhe`, error))
+        }
+    }
+}
+
+export const addComment = (blog, comment) => {
+    return async dispatch => {
+        try {
+            const commentedBlog = await blogService.comment(blog.id, comment)
+            dispatch({
+                type: 'REPLACE_BLOG',
+                data: commentedBlog
+            })
+            dispatch(notify('Kommentti lisätty!'))
+        }catch (error) {
+            dispatch(notify(`Blog '${blog.title}' on jo valitettavasti poistettu palvelimelta`, 'error'))
+            dispatch({
+                type: 'DELETE_BLOG',
+                data: blog.id
+            })
         }
     }
 }
