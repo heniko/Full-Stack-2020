@@ -56,7 +56,7 @@ const App = () => {
               <Modal.Title>Add blog</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <BlogForm />
+              <BlogForm handleHideBlogForm={handleHideBlogForm}/>
             </Modal.Body>
           </Modal>
           <Switch>

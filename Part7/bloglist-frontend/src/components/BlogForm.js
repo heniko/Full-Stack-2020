@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import { useField } from '../hooks/index'
 import { createBlog } from '../reducers/blogReducer'
 
-const BlogForm = () => {
+const BlogForm = ({handleHideBlogForm}) => {
   const title = useField('text')
   const author = useField('text')
   const url = useField('text')
@@ -23,6 +23,7 @@ const BlogForm = () => {
     author.reset()
     url.reset()
     dispatch(createBlog(blogObj, user))
+    handleHideBlogForm()
   }
 
   return (
