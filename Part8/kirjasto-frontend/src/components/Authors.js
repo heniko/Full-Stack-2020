@@ -1,11 +1,7 @@
 import React from 'react'
 
 const Authors = ({ show, authors }) => {
-  if (!show) {
-    return null
-  }
-
-  if (authors.loading) {
+  if (!show || authors.loading) {
     return null
   }
 
