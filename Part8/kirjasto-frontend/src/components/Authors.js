@@ -1,11 +1,13 @@
-  
 import React from 'react'
 
-const Authors = (props) => {
-  if (!props.show) {
+const Authors = ({ show, authors }) => {
+  if (!show) {
     return null
   }
-  const authors = []
+
+  if (authors.loading) {
+    return null
+  }
 
   return (
     <div>
@@ -21,7 +23,7 @@ const Authors = (props) => {
               books
             </th>
           </tr>
-          {authors.map(a =>
+          {authors.data.allAuthors.map(a =>
             <tr key={a.name}>
               <td>{a.name}</td>
               <td>{a.born}</td>
