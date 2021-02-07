@@ -9,7 +9,7 @@ import Recommended from './components/Recommended'
 import { ALL_AUTHORS, ALL_BOOKS } from './queries'
 
 const App = () => {
-  const [page, setPage] = useState('author')
+  const [page, setPage] = useState('authors')
   const [token, setToken] = useState(null)
   const authors = useQuery(ALL_AUTHORS)
   const books = useQuery(ALL_BOOKS)
