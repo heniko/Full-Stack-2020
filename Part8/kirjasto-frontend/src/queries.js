@@ -62,3 +62,27 @@ export const EDIT_AUTHOR = gql`
         }
     }
 `
+
+export const LOGIN = gql`
+    mutation login($username: String!, $password: String!) {
+        login(
+            username:$username
+            password:$password
+        ){
+            value
+        }
+    }
+`
+
+export const CREATE_USER = gql`
+    mutation createUser($username: String!, $favouriteGenre: String) {
+        createUser(
+            username:$username
+            favouriteGenre:$favouriteGenre
+        ){
+            username
+            favouriteGenre
+            id
+        }
+    }
+`
