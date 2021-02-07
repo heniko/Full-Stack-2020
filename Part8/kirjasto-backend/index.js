@@ -26,6 +26,12 @@ mongoserver.getUri().then((mongoUri) => {
     })
 })
 mongoose.connection.once('open', async () => {
+  const user = new User({
+    username: 'user',
+    favouriteGenre: 'refactoring'
+  })
+  await user.save()
+
   const auth = new Author({
     name: 'Robert Martin',
     born: 1952,
@@ -182,7 +188,7 @@ const resolvers = {
       try {
         const user = await User.findOne({ username: args.username })
 
-        if (!user || args.password !== 'sekret') {
+        if (!user || args.password !== 'secret') {
           throw new UserInputError('Wrong username or password')
         }
 
