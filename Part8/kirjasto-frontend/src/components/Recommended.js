@@ -9,7 +9,8 @@ const Recommended = ({ show }) => {
   const me = useQuery(ME)
   const books = useQuery(ALL_BOOKS, {
     variables: { genre: favouriteGenre },
-    fetchPolicy: 'no-cache'
+    pollInterval:250,
+    fetchPolicy:'cache-only'
   })
 
   useEffect(() => {
@@ -17,12 +18,6 @@ const Recommended = ({ show }) => {
       setFavouriteGenre(me.data.me.favouriteGenre)
     }
   }, [me.loading]) // eslint-disable-line
-
-  useEffect(() => {
-    if (show) {
-      books.refetch()
-    }
-  }, [show]) // eslint-disable-line
 
   useEffect(() => {
     if (!books.loading && books.data) {

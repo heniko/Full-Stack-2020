@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 
 import { ADD_BOOK, ALL_BOOKS, ALL_AUTHORS } from '../queries'
 
-const NewBook = ({ show }) => {
+const NewBook = ({ show, cacheUpdater }) => {
   const [title, setTitle] = useState('')
   const [author, setAuhtor] = useState('')
   const [published, setPublished] = useState('')
@@ -16,6 +16,9 @@ const NewBook = ({ show }) => {
     ],
     onError: (error) => {
       console.log(error)
+    },
+    update: (store, response) => {
+      cacheUpdater(response.data.addBook)
     }
   })
 

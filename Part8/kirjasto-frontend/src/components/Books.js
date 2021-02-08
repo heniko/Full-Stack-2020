@@ -7,7 +7,8 @@ const Books = ({ show, books }) => {
   const [genre, setGenre] = useState('')
   const { data, loading, refetch } = useQuery(ALL_BOOKS, {
     variables: { genre: genre },
-    fetchPolicy: 'no-cache'
+    pollInterval:250,
+    fetchPolicy:'cache-only'
   })
   const [booksToShow, setBooksToShow] = useState([])
 
@@ -16,12 +17,6 @@ const Books = ({ show, books }) => {
       setBooksToShow(data.allBooks)
     }
   }, [data, loading]) // eslint-disable-line
-
-  useEffect(() => {
-    if(show) {
-      refetch()
-    }
-  }, [show]) // eslint-disable-line
 
   if (!show) {
     return null
