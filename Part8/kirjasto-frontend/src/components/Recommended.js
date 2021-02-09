@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 
-import { ME, ALL_BOOKS } from '../queries'
+import { ME, ALL_BOOKS, BOOK_ADDED } from '../queries'
 
 const Recommended = ({ show }) => {
   const [favouriteGenre, setFavouriteGenre] = useState('')
   const [booksToShow, setBooksToShow] = useState([])
   const me = useQuery(ME)
   const books = useQuery(ALL_BOOKS, {
-    variables: { genre: favouriteGenre },
-    pollInterval:250,
-    fetchPolicy:'cache-only'
+    variables: { genre: favouriteGenre }
   })
+
+  useEffect(() => {
+    books.subscribeToMore({
+      document: BOOK_ADDED,
+      updateQuery:(prev, {subscriptionData}) => {
+        books.refetch()
+      }
+    })
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     if (!me.loading && me.data.me) {

@@ -16,9 +16,6 @@ const NewBook = ({ show, cacheUpdater }) => {
     ],
     onError: (error) => {
       console.log(error)
-    },
-    update: (store, response) => {
-      cacheUpdater(response.data.addBook)
     }
   })
 

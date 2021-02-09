@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 
-import { ALL_BOOKS } from '../queries'
+import { ALL_BOOKS, BOOK_ADDED } from '../queries'
 
-const Books = ({ show, books }) => {
+const Books = ({ show, allBooks }) => {
   const [genre, setGenre] = useState('')
-  const { data, loading, refetch } = useQuery(ALL_BOOKS, {
-    variables: { genre: genre },
-    pollInterval:250,
-    fetchPolicy:'cache-only'
-  })
   const [booksToShow, setBooksToShow] = useState([])
+  const { data, loading, refetch, subscribeToMore } = useQuery(ALL_BOOKS, {
+    variables: { genre: genre },
+    fetchPolicy: 'no-cache'
+  })
+
+  useEffect(() => {
+    if (!loading && data) {
+      setBooksToShow(data.allBooks)
+    }
+  }, [loading, data, genre]) // eslint-disable-line
+
+  useEffect(() => {
+    subscribeToMore({
+      document: BOOK_ADDED,
+      updateQuery:(prev, {subscriptionData}) => {
+        refetch()
+      }
+    })
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     if (!loading && data) {
@@ -22,7 +36,7 @@ const Books = ({ show, books }) => {
     return null
   }
 
-  if (books.loading) {
+  if (loading) {
     return null
   }
 
@@ -33,7 +47,7 @@ const Books = ({ show, books }) => {
 
   const reducer = (accumulator, currentValue) => accumulator.concat(currentValue)
   const unique = (value, index, self) => self.indexOf(value) === index
-  const allGenres = books.data.allBooks
+  const allGenres = allBooks.data.allBooks
     .map(book => book.genres)
     .reduce(reducer, [])
     .filter(unique)

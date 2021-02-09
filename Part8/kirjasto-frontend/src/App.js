@@ -31,7 +31,6 @@ const App = () => {
 
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData.data.bookAdded)
       updateCacheWith(subscriptionData.data.bookAdded)
     }
   })
@@ -72,7 +71,6 @@ const App = () => {
 
       <Recommended
         show={page === 'recommended'}
-        books={books}
       />
 
       <LoginForm
@@ -87,7 +85,7 @@ const App = () => {
 
       <Books
         show={page === 'books'}
-        books={books}
+        allBooks={books}
       />
 
       <NewBook
