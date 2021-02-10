@@ -13,7 +13,7 @@ interface ExerciseArguments {
     dailyHours: Array<number>
 }
 
-const calculateExercises = (dailyHours: Array<number>, target: number): Result => {
+export const calculateExercises = (dailyHours: Array<number>, target: number): Result => {
     const periodLength: number = dailyHours.length;
     const trainingDays: number = dailyHours.reduce((accumulator: number, currentValue: number): number => {
         return currentValue > 0 ? accumulator + 1 : accumulator;
