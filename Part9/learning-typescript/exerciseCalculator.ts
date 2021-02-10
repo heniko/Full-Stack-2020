@@ -19,7 +19,7 @@ const calculateExercises = (dailyHours: Array<number>, target: number): Result =
         return currentValue > 0 ? accumulator + 1 : accumulator;
     }, 0);
     const average: number = dailyHours.reduce((accumulator: number, currentValue: number): number => {
-        return accumulator + currentValue
+        return accumulator + currentValue;
     }, 0) / periodLength;
     const success: boolean = average >= target;
     let rating: number;
@@ -43,12 +43,12 @@ const calculateExercises = (dailyHours: Array<number>, target: number): Result =
         ratingDescription,
         target,
         average
-    }
-}
+    };
+};
 
 const parseExerciseArguments = (args: Array<string>): ExerciseArguments => {
     if (args.length < 4) throw new Error('Not enough arguments');
-    for (let i: number = 2; i < args.length; i++) {
+    for (let i = 2; i < args.length; i++) {
         if (isNaN(Number(args[i]))) {
             throw new Error('Provided values were not numbers');
         }
@@ -56,12 +56,12 @@ const parseExerciseArguments = (args: Array<string>): ExerciseArguments => {
     return {
         target: Number(args[2]),
         dailyHours: args.slice(3).map(value => Number(value))
-    }
-}
+    };
+};
 
 try {
     const { target, dailyHours } = parseExerciseArguments(process.argv);
     console.log(calculateExercises(dailyHours, target));
 } catch (error) {
-    console.log('Error! Something went wrong, message: ', error.message);
+    console.log('Error! Something went wrong, message: ', (<Error>error).message);
 }
