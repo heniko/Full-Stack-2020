@@ -12,6 +12,7 @@
   "dependencies": {
     "apollo-server": "^2.19.2",
     "cross-env": "^7.0.3",
+    "dataloader": "^2.0.0",
     "graphql": "^15.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^6.9.3",

@@ -1,6 +1,7 @@
 const { ApolloServer, gql, UserInputError, AuthenticationError, PubSub, PubSubEngine } = require('apollo-server')
 const pubsub = new PubSub()
 const jwt = require('jsonwebtoken')
+const DataLoader = require('dataloader')
 
 const Author = require('./models/author')
 const Book = require('./models/book')
@@ -132,7 +133,15 @@ const resolvers = {
   },
   Author: {
     bookCount: async (root) => {
-      const books = await Book.find({ author: root.id })
+      const bookLoader = new DataLoader((keys) => {
+        const result = keys.map((authorId) => {
+          return Book.find({ author: authorId })
+        })
+
+        return Promise.resolve(result)
+      })
+
+      const books = await bookLoader.load(root.id)
       return books.length
     }
   },
