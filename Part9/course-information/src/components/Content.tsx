@@ -1,10 +1,13 @@
 import React from 'react';
 
-const Content: React.FC<{ parts: Array<{ name: string, exerciseCount: number }> }> = ({ parts }) => {
+import Part from './Part';
+import { CoursePart } from '../index';
+
+const Content: React.FC<{ parts: CoursePart[] }> = ({ parts }) => {
     return (
         <>
             {
-                parts.map(part => <p key={part.name}>{part.name} {part.exerciseCount}</p>)
+                parts.map(part => <Part key={part.name} part={part} />)
             }
         </>
     );

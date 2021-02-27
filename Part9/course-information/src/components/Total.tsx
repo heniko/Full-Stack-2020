@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Total: React.FC<{ parts: Array<{ name: string, exerciseCount: number }> }> = ({ parts }) => {
+import { CoursePart } from '../index';
+
+const Total: React.FC<{ parts: CoursePart[] }> = ({ parts }) => {
     return (
         <>
-            <p>
-                Number of exercises {parts.reduce((carry, part) => carry + part.exerciseCount, 0)}.
-            </p>
+            <h4>
+                Total number of exercises {parts.reduce((carry, part) => carry + part.exerciseCount, 0)}.
+            </h4>
         </>
     );
 }
