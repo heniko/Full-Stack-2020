@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import patientsData from '../../data/patients';
-import { Patient, NewPatient, NewEntry, Entry } from '../types';
+import { Patient, NewPatient, Entry } from '../types';
 
 let patients: Array<Patient> = patientsData;
 
@@ -25,8 +25,8 @@ const addPatient = (patient: NewPatient): Patient => {
     return obj;
 };
 
-const addEntry = (patient: Patient, entry: NewEntry): Patient => {
-    const obj = entry as Entry;
+const addEntry = (patient: Patient, entry: Entry): Patient => {
+    const obj = entry;
     obj.id = uuid();
     const updatedPatient: Patient = {
         ...patient,
