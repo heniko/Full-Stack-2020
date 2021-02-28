@@ -11,7 +11,7 @@ const isDate = (date: any): boolean => {
 
 const isGender = (gender: any): gender is Gender => {
     return Object.values(Gender).includes(gender);
-}
+};
 
 const parseName = (name: any): string => {
     if (!name || !isString(name)) {
@@ -53,12 +53,21 @@ const parseOccupation = (occupation: any): string => {
     return occupation;
 };
 
+const parseEntries = (entries: []): [] => {
+    if (!Array.isArray(entries)) {
+        throw new Error('Incorrect or missing entries ' + entries);
+    }
+
+    return entries;
+};
+
 export const toNewPatient = (object: any): NewPatient => {
     return {
         name: parseName(object.name),
         dateOfBirth: parseDateOfBirth(object.dateOfBirth),
         ssn: parseSsn(object.ssn),
         gender: parseGender(object.gender),
-        occupation: parseOccupation(object.occupation)
+        occupation: parseOccupation(object.occupation),
+        entries: parseEntries(object.entries)
     };
 };

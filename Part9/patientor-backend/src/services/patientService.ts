@@ -4,7 +4,7 @@ import { Patient, NewPatient } from '../types';
 
 const patients: Array<Patient> = patientsData;
 
-const getPatientsWithoutSsn = (): Omit<Patient, 'ssn'>[] => {
+const getPatientsWithoutSsn = (): Omit<Patient, 'ssn' | 'entries'>[] => {
     return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
         id,
         name,
@@ -12,6 +12,10 @@ const getPatientsWithoutSsn = (): Omit<Patient, 'ssn'>[] => {
         gender,
         occupation
     }));
+};
+
+const getPatientWithId = (id:string): Patient | undefined => {
+    return patients.find(patient => patient.id === id);
 };
 
 const addPatient = (patient: NewPatient): Patient => {
@@ -23,5 +27,6 @@ const addPatient = (patient: NewPatient): Patient => {
 
 export default {
     getPatientsWithoutSsn,
+    getPatientWithId,
     addPatient
 };
