@@ -175,7 +175,7 @@ export const toNewEntry = (entry: any): Entry => {
         case Type.HealthCheckEntry:
             newEntry = {
                 id: "",
-                description: parseDescription(entry.type),
+                description: parseDescription(entry.description),
                 date: parseDate(entry.date),
                 specialist: parseSpecialist(entry.specialist),
                 type: Type.HealthCheckEntry,
@@ -188,7 +188,7 @@ export const toNewEntry = (entry: any): Entry => {
         case Type.HospitalEntry:
             newEntry = {
                 id: "",
-                description: parseDescription(entry.type),
+                description: parseDescription(entry.description),
                 date: parseDate(entry.date),
                 specialist: parseSpecialist(entry.specialist),
                 type: Type.HospitalEntry,
@@ -201,7 +201,7 @@ export const toNewEntry = (entry: any): Entry => {
         case Type.OccupationalHealthCareEntry:
             newEntry = {
                 id: "",
-                description: parseDescription(entry.type),
+                description: parseDescription(entry.description),
                 date: parseDate(entry.date),
                 specialist: parseSpecialist(entry.specialist),
                 type: Type.OccupationalHealthCareEntry,
