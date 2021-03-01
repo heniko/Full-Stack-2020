@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
             res.status(404).send();
         }
     } catch (error) {
-        res.status(400).send((<Error>error).message);
+        res.status(400).send({ error: (<Error>error).message });
     }
 });
 
@@ -29,12 +29,12 @@ router.post('/:id/entries', (req, res) => {
         if (patient) {
             const updatedPatient = patientService.addEntry(patient, newEntry);
             res.send(updatedPatient);
-        }else {
+        } else {
             res.status(404).send();
         }
-    }catch(error){
+    } catch (error) {
         console.error(error);
-        res.status(400).send((<Error>error).message);
+        res.status(400).json({ error: (<Error>error).message });
     }
 });
 
@@ -44,7 +44,8 @@ router.post('/', (req, res) => {
         const addedPatient = patientService.addPatient(newPatient);
         res.send(addedPatient);
     } catch (error) {
-        res.status(400).send((<Error>error).message);
+        console.error(error);
+        res.status(400).json({ error: (<Error>error).message });
     }
 });
 
